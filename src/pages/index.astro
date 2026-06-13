@@ -1,0 +1,82 @@
+---
+import Layout from '../layouts/Layout.astro';
+import PricingTable from '../components/PricingTable.svelte';
+import TalentPool from '../components/TalentPool.svelte';
+
+const whatsappNumber = "6285741850050";
+const defaultMessage = encodeURIComponent("Hello Sorecare, I would like to book a premium care service.");
+const whatsappUrl = `https://wa.me/${whatsappNumber}?text=${defaultMessage}`;
+---
+
+<Layout title="Sorecare | Premium Private Nurse & Caregiver Service in Bali">
+  <!-- Navbar -->
+  <nav class="border-b border-zinc-100 bg-white/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-5xl mx-auto px-6 h-20 flex items-center justify-between">
+      <div class="flex flex-col">
+        <!-- Text-Based Logo Premium Styling -->
+        <span class="font-serif text-2xl font-bold tracking-tight text-[#1b4332] leading-none">SORECARE</span>
+      </div>
+      <a href="#pricing" class="bg-[#1b4332] text-white px-5 py-2.5 rounded-full text-sm font-semibold hover:bg-[#143225] transition-all">
+        Book Now
+      </a>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <header class="max-w-5xl mx-auto px-6 py-20 text-center">
+    <span class="text-xs font-bold uppercase tracking-widest text-[#1b4332] bg-[#1b4332]/5 px-3 py-1.5 rounded-full">Available 24/7 in Bali</span>
+    <h1 class="text-4xl md:text-6xl font-serif text-zinc-900 mt-6 tracking-tight max-w-3xl mx-auto leading-tight">
+      Premium Private Care & Nursing for Your Loved Ones
+    </h1>
+    <p class="text-zinc-600 mt-6 text-lg max-w-2xl mx-auto leading-relaxed">
+      Professional, hourly-based on-demand nursing and caregiver services across Denpasar, Sanur, Canggu, and South Kuta.
+    </p>
+    <div class="mt-10 flex flex-col sm:flex-row justify-center gap-4">
+      <a href="#pricing" class="bg-[#1b4332] text-white px-8 py-4 rounded-xl font-medium text-base hover:bg-[#143225] text-center transition-all shadow-lg shadow-[#1b4332]/10">
+        View Pricing Plans
+      </a>
+      <a href={whatsappUrl} target="_blank" class="border border-zinc-200 text-zinc-800 bg-white px-8 py-4 rounded-xl font-medium text-base hover:bg-zinc-50 text-center transition-all">
+        Chat with Us Directly
+      </a>
+    </div>
+  </header>
+
+  <!-- Section Live Talent Pool (Svelte Component) -->
+  <section class="bg-zinc-50 py-20 border-y border-zinc-100">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-12">
+        <h2 class="text-3xl font-serif text-zinc-900">Our Available Caregivers</h2>
+        <p class="text-zinc-500 text-sm mt-2">⚡ 14 Caregivers currently active on the field today.</p>
+      </div>
+      <TalentPool client:load whatsappUrl={whatsappUrl} />
+    </div>
+  </section>
+
+  <!-- Section Pricing (Svelte Component) -->
+  <section id="pricing" class="py-20">
+    <div class="max-w-5xl mx-auto px-6">
+      <div class="text-center mb-16">
+        <h2 class="text-3xl font-serif text-zinc-900">Transparent Hourly Rates</h2>
+        <p class="text-zinc-500 mt-2">No hidden administrative fees. Simple and flexible.</p>
+      </div>
+      <PricingTable client:load whatsappNumber={whatsappNumber} />
+      
+      <!-- Rules / Terms -->
+      <div class="mt-12 bg-zinc-50 border border-zinc-100 rounded-2xl p-6 max-w-3xl mx-auto text-sm text-zinc-600 space-y-3">
+        <p class="font-semibold text-zinc-800">⚠️ Important Service Policies:</p>
+        <p>• **Minimum Order:** 3 hours per visit requirement to maintain service standards.</p>
+        <p>• **Night Shift Premium:** Extra charge applies for services between 20:00 - 06:00 WITA.</p>
+        <p>• **Transport Fee:** Applied transparently if the client's location exceeds 10 KM from the central base.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer dengan ID untuk JavaScript Real-time -->
+  <footer class="border-t border-zinc-100 py-12 bg-white text-center text-zinc-400 text-xs">
+    <p>&copy; <span id="current-year"></span> Sorecare. All rights reserved.</p>
+  </footer>
+</Layout>
+
+<script is:inline>
+  document.getElementById('current-year').textContent = new Date().getFullYear();
+</script>
